@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.model_selection import train_test_split
 
 # Load the dataset
 df = pd.read_csv('datasets/laliga_player_stats.csv')
@@ -88,14 +89,8 @@ for col in df.select_dtypes(include='number').columns:
     outliers = df[(df[col] < q1 - 1.5 * iqr) | (df[col] > q3 + 1.5 * iqr)]
     print(f'Outliers in {col}:', len(outliers))
 
-# 5. Categorical Dominance: Teams/positions with most players/highest avg performance
-print('\nTop 5 teams by player count:')
-print(df['Team'].value_counts().head())
-if 'Goals scored' in df.columns:
-    print('Top 5 teams by average goals:')
-    print(df.groupby('Team')['Goals scored'].mean().sort_values(ascending=False).head())
-print('\nTop 5 positions by player count:')
-print(df['Position'].value_counts().head())
-if 'Goals scored' in df.columns:
-    print('Top 5 positions by average goals:')
-    print(df.groupby('Position')['Goals scored'].mean().sort_values(ascending=False).head())
+
+# Split the data into train and test sets (80/20 split)
+train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
+print(f'\nTrain set shape: {train_df.shape}')
+print(f'Test set shape: {test_df.shape}')

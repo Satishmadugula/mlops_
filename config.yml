@@ -1,0 +1,14 @@
+Project: MLOps
+Date: 03-Aug-2025
+isStudent: true
+
+
+# Lists/Arrays (sequences)
+skills:
+  - Python
+  - JavaScript
+  - YAML
+
+Docker: 
+ Docker_Imges: "some/docker_image_path"
+ Image_name: "my_image"    
